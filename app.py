@@ -77,6 +77,15 @@ with st.sidebar:
 st.markdown("# AI 排版助手")
 st.caption("上传文档 · 自动排版 · 对话微调")
 
+# ── 初始化 session state ──
+for key, default in [
+    ("agent", None), ("current_file", None), ("chat_history", []),
+    ("formats", []), ("output_path", None), ("changelog", []),
+    ("input_path", None),
+]:
+    if key not in st.session_state:
+        st.session_state[key] = default
+
 uploaded = st.file_uploader("上传 Word 文档", type=["docx"], label_visibility="collapsed")
 
 if uploaded:
