@@ -46,9 +46,14 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # ── 侧边栏 ──
+try:
+    default_key = st.secrets.get("api_key", "")
+except Exception:
+    default_key = ""
+
 with st.sidebar:
     st.markdown("### 设置")
-    api_key = st.text_input("API Key", type="password", placeholder="粘贴你的 Key")
+    api_key = st.text_input("API Key", value=default_key, type="password", placeholder="粘贴你的 Key")
     api_url = st.text_input("API 地址", value=DEFAULT_BASE_URL)
     model = st.text_input("模型", value="mimo-v2.5")
     st.markdown("---")
